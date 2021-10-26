@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :api, Todolist.Repo,
   username: "postgres",
-  password: "Lomaco,46100!",
+  password: "test",
   database: "api_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
