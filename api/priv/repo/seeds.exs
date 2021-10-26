@@ -9,7 +9,5 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias Todolist.Repo
-alias Todolist.Repo.Directory.User
-
-Repo.insert! %User{username: "Sebastien", email: "sebastien.begue@epitech.eu"}
+# alias Todolist.Repo
+# alias Todolist.Repo.Directory.Users

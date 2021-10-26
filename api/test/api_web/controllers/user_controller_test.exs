@@ -3,7 +3,7 @@ defmodule TodolistWeb.UserControllerTest do
 
   import Todolist.DirectoryFixtures
 
-  alias Todolist.Directory.User
+  alias Todolist.Directory.Users
 
   @create_attrs %{
     email: "some email",
@@ -21,17 +21,17 @@ defmodule TodolistWeb.UserControllerTest do
 
   describe "index" do
     test "lists all users", %{conn: conn} do
-      conn = get(conn, Routes.user_path(conn, :index))
+      conn = get(conn, Routes.users_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
 
-  describe "create user" do
-    test "renders user when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
+  describe "create users" do
+    test "renders users when data is valid", %{conn: conn} do
+      conn = post(conn, Routes.users_path(conn, :create), users: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get(conn, Routes.user_path(conn, :show, id))
+      conn = get(conn, Routes.users_path(conn, :show, id))
 
       assert %{
                "id" => ^id,
@@ -41,19 +41,19 @@ defmodule TodolistWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @invalid_attrs)
+      conn = post(conn, Routes.users_path(conn, :create), users: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
 
-  describe "update user" do
+  describe "update users" do
     setup [:create_user]
 
-    test "renders user when data is valid", %{conn: conn, user: %User{id: id} = user} do
-      conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
+    test "renders users when data is valid", %{conn: conn, users: %Users{id: id} = users} do
+      conn = put(conn, Routes.users_path(conn, :update, users), users: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get(conn, Routes.user_path(conn, :show, id))
+      conn = get(conn, Routes.users_path(conn, :show, id))
 
       assert %{
                "id" => ^id,
@@ -62,27 +62,27 @@ defmodule TodolistWeb.UserControllerTest do
              } = json_response(conn, 200)["data"]
     end
 
-    test "renders errors when data is invalid", %{conn: conn, user: user} do
-      conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
+    test "renders errors when data is invalid", %{conn: conn, users: users} do
+      conn = put(conn, Routes.users_path(conn, :update, users), users: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
 
-  describe "delete user" do
+  describe "delete users" do
     setup [:create_user]
 
-    test "deletes chosen user", %{conn: conn, user: user} do
-      conn = delete(conn, Routes.user_path(conn, :delete, user))
+    test "deletes chosen users", %{conn: conn, users: users} do
+      conn = delete(conn, Routes.users_path(conn, :delete, users))
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->
-        get(conn, Routes.user_path(conn, :show, user))
+        get(conn, Routes.users_path(conn, :show, users))
       end
     end
   end
 
   defp create_user(_) do
-    user = user_fixture()
-    %{user: user}
+    users = users_fixture()
+    %{users: users}
   end
 end

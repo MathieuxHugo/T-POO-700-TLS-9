@@ -5,10 +5,10 @@ defmodule Todolist.DirectoryFixtures do
   """
 
   @doc """
-  Generate a user.
+  Generate a users.
   """
-  def user_fixture(attrs \\ %{}) do
-    {:ok, user} =
+  def users_fixture(attrs \\ %{}) do
+    {:ok, users} =
       attrs
       |> Enum.into(%{
         email: "some email",
@@ -16,6 +16,36 @@ defmodule Todolist.DirectoryFixtures do
       })
       |> Todolist.Directory.create_user()
 
-    user
+    users
+  end
+
+  @doc """
+  Generate a clocks.
+  """
+  def clocks_fixture(attrs \\ %{}) do
+    {:ok, clocks} =
+      attrs
+      |> Enum.into(%{
+        status: true,
+        time: ~T[14:00:00]
+      })
+      |> Todolist.Directory.create_clocks()
+
+    clocks
+  end
+
+  @doc """
+  Generate a workingtimes.
+  """
+  def workingtimes_fixture(attrs \\ %{}) do
+    {:ok, workingtimes} =
+      attrs
+      |> Enum.into(%{
+        end: ~N[2021-10-25 07:51:00],
+        start: ~N[2021-10-25 07:51:00]
+      })
+      |> Todolist.Directory.create_workingtimes()
+
+    workingtimes
   end
 end

@@ -1,4 +1,4 @@
-defmodule Todolist.Directory.User do
+defmodule Todolist.Directory.Users do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -10,8 +10,8 @@ defmodule Todolist.Directory.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
-    user
+  def changeset(users, attrs) do
+    users
     |> cast(attrs, [:username, :email])
     |> validate_required([:username, :email])
   end

@@ -11,7 +11,7 @@ if config_env() == :prod do
     System.get_env("DATABASE_URL") ||
       raise """
       environment variable DATABASE_URL is missing.
-      For example: ecto://USER:PASS@HOST/DATABASE
+      For example: ecto://USERS:PASS@HOST/DATABASE
       """
 
   config :api, Todolist.Repo,
