@@ -1,6 +1,6 @@
-defmodule TodolistWeb.UserView do
+defmodule TodolistWeb.UsersView do
   use TodolistWeb, :view
-  alias TodolistWeb.UserView
+  alias TodolistWeb.UsersView
 
   def render("index.json", %{users: users}) do
     %{data: render_many(users, UserView, "users.json")}

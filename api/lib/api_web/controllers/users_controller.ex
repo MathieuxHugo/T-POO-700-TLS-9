@@ -1,4 +1,4 @@
-defmodule TodolistWeb.UserController do
+defmodule TodolistWeb.UsersController do
   use TodolistWeb, :controller
 
   alias Todolist.Directory
@@ -28,7 +28,7 @@ defmodule TodolistWeb.UserController do
   def update(conn, %{"id" => id, "users" => users_params}) do
     users = Directory.get_users!(id)
 
-    with {:ok, %Users{} = users} <- Directory.update_user(users, users_params) do
+    with {:ok, %Users{} = users} <- Directory.update_users(users, users_params) do
       render(conn, "show.json", users: users)
     end
   end

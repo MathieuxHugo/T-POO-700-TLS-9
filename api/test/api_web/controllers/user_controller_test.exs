@@ -1,4 +1,4 @@
-defmodule TodolistWeb.UserControllerTest do
+defmodule TodolistWeb.UsersControllerTest do
   use TodolistWeb.ConnCase
 
   import Todolist.DirectoryFixtures

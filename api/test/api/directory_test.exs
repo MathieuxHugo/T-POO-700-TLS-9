@@ -15,7 +15,7 @@ defmodule Todolist.DirectoryTest do
       assert Directory.list_users() == [users]
     end
 
-    test "get_user!/1 returns the users with given id" do
+    test "get_users!/1 returns the users with given id" do
       users = users_fixture()
       assert Directory.get_users!(users.id) == users
     end

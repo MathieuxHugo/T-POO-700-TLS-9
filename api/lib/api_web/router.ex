@@ -7,7 +7,7 @@ defmodule TodolistWeb.Router do
 
   scope "/api", TodolistWeb do
     pipe_through :api
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UsersController, except: [:new, :edit]
     resources "/clocks", ClocksController, except: [:new, :edit]
     resources "/workingtimes", WorkingtimesController, except: [:new, :edit]
   end
