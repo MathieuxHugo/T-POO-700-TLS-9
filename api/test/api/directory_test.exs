@@ -17,45 +17,45 @@ defmodule Todolist.DirectoryTest do
 
     test "get_user!/1 returns the users with given id" do
       users = users_fixture()
-      assert Directory.get_user!(users.id) == users
+      assert Directory.get_users!(users.id) == users
     end
 
-    test "create_user/1 with valid data creates a users" do
+    test "create_users/1 with valid data creates a users" do
       valid_attrs = %{email: "some email", username: "some username"}
 
-      assert {:ok, %Users{} = users} = Directory.create_user(valid_attrs)
+      assert {:ok, %Users{} = users} = Directory.create_users(valid_attrs)
       assert users.email == "some email"
       assert users.username == "some username"
     end
 
-    test "create_user/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Directory.create_user(@invalid_attrs)
+    test "create_users/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Directory.create_users(@invalid_attrs)
     end
 
-    test "update_user/2 with valid data updates the users" do
+    test "update_users/2 with valid data updates the users" do
       users = users_fixture()
       update_attrs = %{email: "some updated email", username: "some updated username"}
 
-      assert {:ok, %Users{} = users} = Directory.update_user(users, update_attrs)
+      assert {:ok, %Users{} = users} = Directory.update_users(users, update_attrs)
       assert users.email == "some updated email"
       assert users.username == "some updated username"
     end
 
-    test "update_user/2 with invalid data returns error changeset" do
+    test "update_users/2 with invalid data returns error changeset" do
       users = users_fixture()
-      assert {:error, %Ecto.Changeset{}} = Directory.update_user(users, @invalid_attrs)
-      assert users == Directory.get_user!(users.id)
+      assert {:error, %Ecto.Changeset{}} = Directory.update_users(users, @invalid_attrs)
+      assert users == Directory.get_users!(users.id)
     end
 
-    test "delete_user/1 deletes the users" do
+    test "delete_users/1 deletes the users" do
       users = users_fixture()
-      assert {:ok, %Users{}} = Directory.delete_user(users)
-      assert_raise Ecto.NoResultsError, fn -> Directory.get_user!(users.id) end
+      assert {:ok, %Users{}} = Directory.delete_users(users)
+      assert_raise Ecto.NoResultsError, fn -> Directory.get_users!(users.id) end
     end
 
-    test "change_user/1 returns a users changeset" do
+    test "change_users/1 returns a users changeset" do
       users = users_fixture()
-      assert %Ecto.Changeset{} = Directory.change_user(users)
+      assert %Ecto.Changeset{} = Directory.change_users(users)
     end
   end
 

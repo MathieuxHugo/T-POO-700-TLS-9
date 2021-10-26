@@ -28,28 +28,28 @@ defmodule Todolist.Directory do
 
   ## Examples
 
-      iex> get_user!(123)
+      iex> get_users!(123)
       %Users{}
 
-      iex> get_user!(456)
+      iex> get_users!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(Users, id)
+  def get_users!(id), do: Repo.get!(Users, id)
 
   @doc """
   Creates a users.
 
   ## Examples
 
-      iex> create_user(%{field: value})
+      iex> create_users(%{field: value})
       {:ok, %Users{}}
 
-      iex> create_user(%{field: bad_value})
+      iex> create_users(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_user(attrs \\ %{}) do
+  def create_users(attrs \\ %{}) do
     %Users{}
     |> Users.changeset(attrs)
     |> Repo.insert()
@@ -60,14 +60,14 @@ defmodule Todolist.Directory do
 
   ## Examples
 
-      iex> update_user(users, %{field: new_value})
+      iex> update_users(users, %{field: new_value})
       {:ok, %Users{}}
 
-      iex> update_user(users, %{field: bad_value})
+      iex> update_users(users, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_user(%Users{} = users, attrs) do
+  def update_users(%Users{} = users, attrs) do
     users
     |> Users.changeset(attrs)
     |> Repo.update()
@@ -78,14 +78,14 @@ defmodule Todolist.Directory do
 
   ## Examples
 
-      iex> delete_user(users)
+      iex> delete_users(users)
       {:ok, %Users{}}
 
-      iex> delete_user(users)
+      iex> delete_users(users)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_user(%Users{} = users) do
+  def delete_users(%Users{} = users) do
     Repo.delete(users)
   end
 
@@ -94,7 +94,7 @@ defmodule Todolist.Directory do
 
   ## Examples
 
-      iex> change_user(users)
+      iex> change_users(users)
       %Ecto.Changeset{data: %Users{}}
 
   """

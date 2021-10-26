@@ -47,7 +47,7 @@ defmodule TodolistWeb.UserControllerTest do
   end
 
   describe "update users" do
-    setup [:create_user]
+    setup [:create_users]
 
     test "renders users when data is valid", %{conn: conn, users: %Users{id: id} = users} do
       conn = put(conn, Routes.users_path(conn, :update, users), users: @update_attrs)
@@ -69,7 +69,7 @@ defmodule TodolistWeb.UserControllerTest do
   end
 
   describe "delete users" do
-    setup [:create_user]
+    setup [:create_users]
 
     test "deletes chosen users", %{conn: conn, users: users} do
       conn = delete(conn, Routes.users_path(conn, :delete, users))
@@ -81,7 +81,7 @@ defmodule TodolistWeb.UserControllerTest do
     end
   end
 
-  defp create_user(_) do
+  defp create_users(_) do
     users = users_fixture()
     %{users: users}
   end

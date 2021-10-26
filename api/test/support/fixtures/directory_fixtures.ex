@@ -14,7 +14,7 @@ defmodule Todolist.DirectoryFixtures do
         email: "some email",
         username: "some username"
       })
-      |> Todolist.Directory.create_user()
+      |> Todolist.Directory.create_users()
 
     users
   end
