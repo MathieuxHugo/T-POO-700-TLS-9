@@ -13,7 +13,7 @@ defmodule Todolist.Directory.Clocks do
   @doc false
   def changeset(clocks, attrs) do
     clocks
-    |> cast(attrs, [:time, :status])
-    |> validate_required([:time, :status])
+    |> cast(attrs, [:time, :status,:users])
+    |> validate_required([:time, :status,:users])
   end
 end

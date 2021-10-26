@@ -5,6 +5,8 @@ defmodule TodolistWeb.UsersController do
   alias Todolist.Directory.Users
   alias Todolist.Repo
 
+  require Logger
+
   action_fallback TodolistWeb.FallbackController
 
   def index(conn, params) do
@@ -14,11 +16,6 @@ defmodule TodolistWeb.UsersController do
       _ -> render("show.json", [])
     end
   end
-
-  # def index_by(conn, %{"username" => username, "email" => email}) do
-  #   user = Repo.get_by(Users, [username: username, email: email])
-  #   render(conn, "show.json", users: user)
-  # end
 
   def create(conn, %{"users" => users_params}) do
     with {:ok, %Users{} = users} <- Directory.create_users(users_params) do

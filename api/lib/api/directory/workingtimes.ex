@@ -13,7 +13,7 @@ defmodule Todolist.Directory.Workingtimes do
   @doc false
   def changeset(workingtimes, attrs) do
     workingtimes
-    |> cast(attrs, [:start, :end])
-    |> validate_required([:start, :end])
+    |> cast(attrs, [:start, :end, :users])
+    |> validate_required([:start, :end, :users])
   end
 end
