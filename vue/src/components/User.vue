@@ -3,6 +3,7 @@
     <h2>User Vue</h2>
     <h2>username : {{this.UserData.username}}</h2>
     <h2>email : {{this.UserData.email}}</h2>
+    <button v-on:click="deleteUser()">Delete user 2</button>
 
   </div>
 </template>
@@ -42,11 +43,10 @@ export default {
       })
     },
     deleteUser () {
-      axios.get('http://localhost:4000/api/users/1', {
+      axios.delete('http://localhost:4000/api/users/2', {
         responseType: 'json'
       }).then(resp => {
-        console.log(resp.data.data)
-        this.UserData = resp.data.data
+        console.log('Succesfully deleted')
       })
     },
     createUser () {
