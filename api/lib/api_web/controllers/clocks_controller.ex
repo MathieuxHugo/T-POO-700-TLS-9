@@ -15,7 +15,7 @@ defmodule TodolistWeb.ClocksController do
   #   render(conn, "index.json", clocks: clocks)
   # end
 
-  def create(conn, %{"id" => id, "clocks" => clocks_params}) do
+  def create(conn, %{"userid" => id, "clocks" => clocks_params}) do
     with {:ok, %Clocks{} = clocks} <- Directory.create_clocks(Map.put( clocks_params, "users",id)) do
       conn
       |> put_status(:created)
@@ -24,7 +24,7 @@ defmodule TodolistWeb.ClocksController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"userid" => id}) do
     query = from u in Clocks, where: u.users == ^id
     clocks = Repo.all(query)
     render(conn, "index.json", clocks: clocks)

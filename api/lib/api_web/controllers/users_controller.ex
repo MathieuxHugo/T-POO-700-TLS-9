@@ -1,4 +1,5 @@
 defmodule TodolistWeb.UsersController do
+  import Ecto.Query, only: [from: 2]
   use TodolistWeb, :controller
 
   alias Todolist.Directory
@@ -9,12 +10,12 @@ defmodule TodolistWeb.UsersController do
 
   action_fallback TodolistWeb.FallbackController
 
-  def index(conn, params) do
-    case params do
-      %{"username" => username, "email" => email}->render(conn, "show.json", users: Repo.get_by(Users, [username: username, email: email]))
-      %{} -> render(conn, "index.json", users: Directory.list_users())
-      _ -> render("show.json", [])
-    end
+  def index(conn, %{"username" => username, "email" => email}) do
+    query = from u in Users,
+        where: u.username == ^username
+        and u.email == ^email
+    users = Repo.all(query)
+    render(conn, "index.json", users: users)
   end
 
   def create(conn, %{"users" => users_params}) do Logger.info(users_params["email"])
@@ -30,12 +31,12 @@ defmodule TodolistWeb.UsersController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"userid" => id}) do
     users = Directory.get_users!(id)
     render(conn, "show.json", users: users)
   end
 
-  def update(conn, %{"id" => id, "users" => users_params}) do
+  def update(conn, %{"userid" => id, "users" => users_params}) do
     users = Directory.get_users!(id)
 
     with {:ok, %Users{} = users} <- Directory.update_users(users, users_params) do
@@ -43,7 +44,7 @@ defmodule TodolistWeb.UsersController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"userid" => id}) do
     users = Directory.get_users!(id)
 
     with {:ok, %Users{}} <- Directory.delete_users(users) do

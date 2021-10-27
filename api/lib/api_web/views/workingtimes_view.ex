@@ -14,7 +14,8 @@ defmodule TodolistWeb.WorkingtimesView do
     %{
       id: workingtimes.id,
       start: workingtimes.start,
-      end: workingtimes.end
+      end: workingtimes.end,
+      users: workingtimes.users
     }
   end
 end

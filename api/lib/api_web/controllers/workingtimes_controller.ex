@@ -8,12 +8,16 @@ defmodule TodolistWeb.WorkingtimesController do
 
   action_fallback TodolistWeb.FallbackController
 
-  def index(conn, _params) do
-    workingtimes = Directory.list_workingtimes()
+  def index(conn, %{"userid" => id, "start" => start, "end" => stop}) do
+    query = from u in Workingtimes,
+            where: u.users == ^id
+            and u.start >= ^start
+            and u.end <= ^stop
+    workingtimes = Repo.all(query)
     render(conn, "index.json", workingtimes: workingtimes)
   end
 
-  def create(conn, %{"id" => id,"workingtimes" => workingtimes_params}) do
+  def create(conn, %{"userid" => id,"workingtimes" => workingtimes_params}) do
     with {:ok, %Workingtimes{} = workingtimes} <- Directory.create_workingtimes(Map.put(workingtimes_params, "users", id)) do
       conn
       |> put_status(:created)
@@ -22,19 +26,10 @@ defmodule TodolistWeb.WorkingtimesController do
     end
   end
 
-  def get_one(conn, %{"userid" => userid, "id" => id}) do
+  def show(conn, %{"userid" => userid, "id" => id}) do
     query = from u in Workingtimes,
             where: u.id == ^id
             and u.users == ^userid
-    workingtimes = Repo.all(query)
-    render(conn, "index.json", workingtimes: workingtimes)
-  end
-
-  def show(conn, %{"id" => id, "start" => start, "end" => stop}) do
-    query = from u in Workingtimes,
-            where: u.users == ^id
-            and u.start >= ^start
-            and u.end <= ^stop
     workingtimes = Repo.all(query)
     render(conn, "index.json", workingtimes: workingtimes)
   end
