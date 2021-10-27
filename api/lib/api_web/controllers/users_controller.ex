@@ -30,11 +30,6 @@ defmodule TodolistWeb.UsersController do
     end
   end
 
-  def create_id(conn) do
-    Logger.warning("OKAYYYYYYYYYYYYY")
-  end
-
-
   def show(conn, %{"id" => id}) do
     users = Directory.get_users!(id)
     render(conn, "show.json", users: users)

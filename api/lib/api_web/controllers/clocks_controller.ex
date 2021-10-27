@@ -1,8 +1,10 @@
 defmodule TodolistWeb.ClocksController do
+  import Ecto.Query, only: [from: 2]
   use TodolistWeb, :controller
 
   alias Todolist.Directory
   alias Todolist.Directory.Clocks
+  alias Todolist.Repo
 
   require Logger
 
@@ -23,8 +25,9 @@ defmodule TodolistWeb.ClocksController do
   end
 
   def show(conn, %{"id" => id}) do
-    clocks = Directory.get_clocks!(id)
-    render(conn, "show.json", clocks: clocks)
+    query = from u in Clocks, where: u.users == ^id
+    clocks = Repo.all(query)
+    render(conn, "index.json", clocks: clocks)
   end
 
   # def update(conn, %{"id" => id, "clocks" => clocks_params}) do
