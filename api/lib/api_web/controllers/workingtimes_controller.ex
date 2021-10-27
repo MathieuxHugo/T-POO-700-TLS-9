@@ -1,8 +1,10 @@
 defmodule TodolistWeb.WorkingtimesController do
+  import Ecto.Query, only: [from: 2]
   use TodolistWeb, :controller
 
   alias Todolist.Directory
   alias Todolist.Directory.Workingtimes
+  alias Todolist.Repo
 
   action_fallback TodolistWeb.FallbackController
 
@@ -11,8 +13,8 @@ defmodule TodolistWeb.WorkingtimesController do
     render(conn, "index.json", workingtimes: workingtimes)
   end
 
-  def create(conn, %{"workingtimes" => workingtimes_params}) do
-    with {:ok, %Workingtimes{} = workingtimes} <- Directory.create_workingtimes(workingtimes_params) do
+  def create(conn, %{"id" => id,"workingtimes" => workingtimes_params}) do
+    with {:ok, %Workingtimes{} = workingtimes} <- Directory.create_workingtimes(Map.put(workingtimes_params, "users", id)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.workingtimes_path(conn, :show, workingtimes))
@@ -20,9 +22,21 @@ defmodule TodolistWeb.WorkingtimesController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    workingtimes = Directory.get_workingtimes!(id)
-    render(conn, "show.json", workingtimes: workingtimes)
+  def get_one(conn, %{"userid" => userid, "id" => id}) do
+    query = from u in Workingtimes,
+            where: u.id == ^id
+            and u.users == ^userid
+    workingtimes = Repo.all(query)
+    render(conn, "index.json", workingtimes: workingtimes)
+  end
+
+  def show(conn, %{"id" => id, "start" => start, "end" => stop}) do
+    query = from u in Workingtimes,
+            where: u.users == ^id
+            and u.start >= ^start
+            and u.end <= ^stop
+    workingtimes = Repo.all(query)
+    render(conn, "index.json", workingtimes: workingtimes)
   end
 
   def update(conn, %{"id" => id, "workingtimes" => workingtimes_params}) do

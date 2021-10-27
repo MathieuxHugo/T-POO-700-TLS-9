@@ -12,12 +12,9 @@ defmodule TodolistWeb.Router do
     get "/clocks/:id", ClocksController,:show
     resources "/users", UsersController, except: [:new, :edit]
     #resources "/clocks", ClocksController, except: [:new, :edit]
-    resources "/workingtimes", WorkingtimesController, except: [:new, :edit]
-  end
-
-  scope "/", TodolistWeb do
-    pipe_through :api
-    get "/", DefaultController, :index
+    get "/workingtimes/:userid/:id", WorkingtimesController, :get_one
+    post "/workingtimes/:id", WorkingtimesController, :create
+    resources "/workingtimes", WorkingtimesController, except: [:create,:index, :new, :edit]
   end
 
 end
