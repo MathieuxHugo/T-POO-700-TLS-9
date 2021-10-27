@@ -3,63 +3,62 @@
     <h2>User Vue</h2>
     <h2>username : {{this.UserData.username}}</h2>
     <h2>email : {{this.UserData.email}}</h2>
-    
+
   </div>
 </template>
 
 <script>
 
-import axios from 'axios' ;
+import axios from 'axios'
 
 export default {
   name: 'User',
 
-    created() {
-        this.getUser();
-    },
+  created () {
+    this.getUser()
+  },
 
-    data () {
-        return {
-        UserData: [],
-        }
-    },
-
-    methods : {
-        getUser(){
-            axios.get('http://localhost:4000/api/users/1', {
-                responseType: "json",
-            }).then(resp => {
-                console.log(resp.data.data);
-                this.UserData = resp.data.data;
-            });
-        },
-        updateUser(){
-            axios.get('http://localhost:4000/api/users/1', {
-                responseType: "json",
-            }).then(resp => {
-                console.log(resp.data.data);
-                this.UserData = resp.data.data;
-            });
-        },
-        deleteUser(){
-            axios.get('http://localhost:4000/api/users/1', {
-                responseType: "json",
-            }).then(resp => {
-                console.log(resp.data.data);
-                this.UserData = resp.data.data;
-            });
-        },
-        createUser(){
-            axios.get('http://localhost:4000/api/users/1', {
-                responseType: "json",
-            }).then(resp => {
-                console.log(resp.data.data);
-                this.UserData = resp.data.data;
-            });
-        }
+  data () {
+    return {
+      UserData: []
     }
-}
+  },
 
+  methods: {
+    getUser () {
+      axios.get('http://localhost:4000/api/users/1', {
+        responseType: 'json'
+      }).then(resp => {
+        console.log(resp.data.data)
+        this.UserData = resp.data.data
+      })
+    },
+    updateUser () {
+      axios.get('http://localhost:4000/api/users/1', {
+        responseType: 'json'
+      }).then(resp => {
+        console.log(resp.data.data)
+        this.UserData = resp.data.data
+      })
+    },
+    deleteUser () {
+      axios.get('http://localhost:4000/api/users/1', {
+        responseType: 'json'
+      }).then(resp => {
+        console.log(resp.data.data)
+        this.UserData = resp.data.data
+      })
+    },
+    createUser () {
+      axios.get('http://localhost:4000/api/users/1', {
+        responseType: 'json'
+      }).then(resp => {
+        console.log(resp.data.data)
+        this.UserData = resp.data.data
+      })
+    }
+  }
+}
 
 </script>
 
