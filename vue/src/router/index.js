@@ -12,6 +12,11 @@ const routes = [
     component: () => import('../components/User.vue')
   },
   {
+    path: '/clock',
+    name: 'ClockManager',
+    component: () => import('../components/ClockManager.vue')
+  },
+  {
     path: '/helloworld',
     name: 'HelloWorld',
     component: () => import('../components/HelloWorld.vue')
