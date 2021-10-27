@@ -1,8 +1,11 @@
 <template>
-    <div>
-        <b-navbar toggleable="lg" type="dark" variant="danger">
-        <router-link class="homeLink" to="/home">Home</router-link>
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        </b-navbar>
-    </div>
+<div>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-navbar-brand href="#" id="navBrand">Home</b-navbar-brand>
+    </b-navbar>
+</div>
 </template>
+
+<style>
+  @import '../assets/styles/Navbar.css';
+</style>
