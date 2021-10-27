@@ -9,6 +9,7 @@ defmodule TodolistWeb.Router do
   scope "/api", TodolistWeb do
     pipe_through :api
 
+<<<<<<< Updated upstream
     get "/users", UsersController, :index
     get "/users/:userid", UsersController, :show
     post "/users", UsersController, :create
@@ -26,6 +27,13 @@ defmodule TodolistWeb.Router do
     #resources "/users", UsersController, except: [:new, :edit]
     #resources "/clocks", ClocksController, except: [:new, :edit]
 
+=======
+    post "/clocks/:id", ClocksController, :create
+    get "/clocks/:id", ClocksController,:show
+    resources "/users", UsersController, except: [:new, :edit]
+    get "/workingtimes/:userid/:id", WorkingtimesController, :get_one
+    post "/workingtimes/:id", WorkingtimesController, :create
+>>>>>>> Stashed changes
     resources "/workingtimes", WorkingtimesController, except: [:create,:index, :new, :edit]
   end
 

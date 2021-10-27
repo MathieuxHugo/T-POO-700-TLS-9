@@ -1,8 +1,8 @@
 <template>
   <div class="">
-    <h2>User Vue Jean paul</h2>
+    <h2>User Vue</h2>
     <h2>username : {{this.UserData.username}}</h2>
-    <h2>email : {{this.UserData.email}} {{truc}}</h2>
+    <h2>email : {{this.UserData.email}}</h2>
     
   </div>
 </template>
@@ -15,20 +15,52 @@ export default {
   name: 'User',
 
     created() {
-        axios.get('http://localhost:4000/api/users/1', {
-            responseType: "json",
-        }).then(resp => {
-            console.log(resp.data.data);
-            this.UserData = resp.data.data;
-        });
+        this.getUser();
     },
 
     data () {
         return {
         UserData: [],
         }
+    },
+
+    methods : {
+        getUser(){
+            axios.get('http://localhost:4000/api/users/1', {
+                responseType: "json",
+            }).then(resp => {
+                console.log(resp.data.data);
+                this.UserData = resp.data.data;
+            });
+        },
+        updateUser(){
+            axios.get('http://localhost:4000/api/users/1', {
+                responseType: "json",
+            }).then(resp => {
+                console.log(resp.data.data);
+                this.UserData = resp.data.data;
+            });
+        },
+        deleteUser(){
+            axios.get('http://localhost:4000/api/users/1', {
+                responseType: "json",
+            }).then(resp => {
+                console.log(resp.data.data);
+                this.UserData = resp.data.data;
+            });
+        },
+        createUser(){
+            axios.get('http://localhost:4000/api/users/1', {
+                responseType: "json",
+            }).then(resp => {
+                console.log(resp.data.data);
+                this.UserData = resp.data.data;
+            });
+        }
     }
 }
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
