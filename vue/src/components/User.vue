@@ -3,7 +3,10 @@
     <h2>User Vue</h2>
     <h2>username : {{this.UserData.username}}</h2>
     <h2>email : {{this.UserData.email}}</h2>
-    <button v-on:click="deleteUser()">Delete user 2</button>
+    <button v-on:click="getUser(1)">Getuser</button>
+    <button v-on:click="deleteUser(1)">Delete user</button>
+    <button v-on:click="createUser('Logan','logan@email.fr')">Create Jean paul</button>
+    <button v-on:click="updateUser(1,'Jean-Paul','jean@gmail.com')">updateUser user 1</button>
 
   </div>
 </template>
@@ -16,7 +19,7 @@ export default {
   name: 'User',
 
   created () {
-    this.getUser()
+    this.getUser(1)
   },
 
   data () {
@@ -26,35 +29,44 @@ export default {
   },
 
   methods: {
-    getUser () {
-      axios.get('http://localhost:4000/api/users/1', {
+    getUser (userID) {
+      axios.get('http://localhost:4000/api/users/'+userID, {
         responseType: 'json'
       }).then(resp => {
-        console.log(resp.data.data)
         this.UserData = resp.data.data
+        console.log(this.UserData);
       })
     },
-    updateUser () {
-      axios.get('http://localhost:4000/api/users/1', {
-        responseType: 'json'
+
+    updateUser (userID,username, email) {
+      axios.put('http://localhost:4000/api/users/'+userID, {
+        users:
+        {
+          username: username,
+          email: email
+        }
       }).then(resp => {
-        console.log(resp.data.data)
-        this.UserData = resp.data.data
+        console.log('Update Done')
       })
     },
-    deleteUser () {
-      axios.delete('http://localhost:4000/api/users/2', {
+
+    deleteUser (userID) {
+      axios.delete('http://localhost:4000/api/users/'+userID, {
         responseType: 'json'
       }).then(resp => {
-        console.log('Succesfully deleted')
+        console.log('Delete Done')
       })
     },
-    createUser () {
-      axios.get('http://localhost:4000/api/users/1', {
-        responseType: 'json'
+
+    createUser (username,email) {
+      axios.post('http://localhost:4000/api/users', {
+      users:
+      {
+        username: username,
+        email: email
+      }
       }).then(resp => {
-        console.log(resp.data.data)
-        this.UserData = resp.data.data
+        console.log("Create Done")
       })
     }
   }
