@@ -4,6 +4,7 @@
         <b-navbar-brand href="/home" id="navBrand">Home</b-navbar-brand>
         <b-navbar-brand href="/workingtimes" id="navBrand">Working Times</b-navbar-brand>
         <b-navbar-brand href="/user" id="">Profile</b-navbar-brand>
+        <b-navbar-brand href="/clock/1" id="">Clock</b-navbar-brand>
     </b-navbar>
 </div>
 </template>
