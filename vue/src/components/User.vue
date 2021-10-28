@@ -31,13 +31,14 @@ export default {
 
   methods: {
     getUser (userID) {
-      axios.get('http://localhost:4000/api/users/' + userID, {
+      axios.get('http://localhost:4000/api/users/'+userID, {
         responseType: 'json'
       }).then(resp => {
         this.UserData = resp.data.data
         console.log(this.UserData)
       })
     },
+
     updateUser (userID, username, email) {
       axios.put('http://localhost:4000/api/users/'+userID, {
         users:

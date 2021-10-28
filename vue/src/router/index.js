@@ -31,6 +31,7 @@ const routes = [
     name: 'workingTimes',
     component: () => import('../components/WorkingTimes.vue')
   }
+
 ]
 
 const router = new VueRouter({

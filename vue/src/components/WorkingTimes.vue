@@ -5,7 +5,8 @@
     <b-table
       id="my-table"
       :items="myProvider()"
-      :fields="['start', 'end']"
+      :fields="['start', 'end', 'id']"
+      @row-clicked="myRowClickHandler"
     ></b-table>
   </div>
   </div>
@@ -14,6 +15,7 @@
 <script>
 
 import axios from 'axios'
+import moment from 'moment'
 
 export default {
   name: 'WorkingTime',
@@ -29,7 +31,7 @@ export default {
 
   methods: {
     getWorkingTimes (userID) {
-      axios.get('http://localhost:4000/api/workingtimes/' + userID + '?start=2018-03-29T12:34:00&end=2018-04-29T19:34:00', {
+      axios.get('http://localhost:4000/api/workingtimes/' + userID + '?start=' + moment().subtract(1, 'month').format('YYYY-MM-D[T]hh:mm:ss') + '&end=' + moment().format('YYYY-MM-D[T]hh:mm:ss'), {
         responseType: 'json'
       }).then(resp => {
         this.workingData = resp.data.data
@@ -50,7 +52,11 @@ export default {
     myProvider () {
       let items = this.workingData
       return items
-    }
+    },
+    myRowClickHandler (record, index) {
+    // 'record' will be the row data from items
+    // `index` will be the visible row number (available in the v-model 'shownItems')
+  }
   }
 }
 
