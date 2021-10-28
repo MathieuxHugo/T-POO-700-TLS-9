@@ -22,9 +22,15 @@ const routes = [
     component: () => import('../components/HelloWorld.vue')
   },
   {
+<<<<<<< HEAD
+    path: '/workingtimes',
+    name: 'WorkingTimes',
+    component: () => import('../components/WorkingTimes.vue')
+=======
     path: '/workingtime/:userid',
     name: 'workingTime',
     component: () => import('../components/WorkingTime.vue')
+>>>>>>> d6cd3ab73da84eb7afa644a2f628269aa0063511
   }
 ]
 

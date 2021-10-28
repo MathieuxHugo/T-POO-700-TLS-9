@@ -3,10 +3,11 @@
     <h2>User Vue</h2>
     <h2>username : {{this.UserData.username}}</h2>
     <h2>email : {{this.UserData.email}}</h2>
+    <!-- Testing routes for USER entity
     <button v-on:click="getUser(1)">Getuser</button>
     <button v-on:click="deleteUser(1)">Delete user</button>
     <button v-on:click="createUser('Logan','logan@email.fr')">Create Jean paul</button>
-    <button v-on:click="updateUser(1,'Jean-Paul','jean@gmail.com')">updateUser user 1</button>
+    <button v-on:click="updateUser(1,'Jean-Paul','jean@gmail.com')">updateUser user 1</button> -->
 
   </div>
 </template>
@@ -37,7 +38,7 @@ export default {
         console.log(this.UserData)
       })
     },
-    updateUser (userID,username, email) {
+    updateUser (userID, username, email) {
       axios.put('http://localhost:4000/api/users/'+userID, {
         users:
         {
@@ -57,15 +58,15 @@ export default {
       })
     },
 
-    createUser (username,email) {
+    createUser (username, email) {
       axios.post('http://localhost:4000/api/users', {
-      users:
+        users:
       {
         username: username,
         email: email
       }
       }).then(resp => {
-        console.log("Create Done")
+        console.log('Create Done')
       })
     }
   }
