@@ -31,7 +31,31 @@ export default {
             console.log(resp.data.data)
             this.resp = resp.data.data
         })
+    },
+    
+    updateWorkingTime () {
+      //Hard code workingtimes parameter
+      axios.put('http://localhost:4000/api/workingtimes/1', {
+          workingtimes:
+          {
+              start: "2018-03-29T13:34:00.000",
+              end: "2018-04-29T13:35:00.000"
+          }
+      }).then(resp => {
+          console.log(resp.data.data)
+          this.resp = resp.data.data
+      })
+    },
+
+    deleteWorkingTime () {
+      //Hard code workingtimes parameter
+      axios.put('http://localhost:4000/api/workingtimes/1')
+      .then(resp => {
+          console.log(resp.data.data)
+          this.resp = resp.data.data
+      })
     }
+
   }
 }
 
