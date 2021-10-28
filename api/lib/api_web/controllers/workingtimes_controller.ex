@@ -21,7 +21,7 @@ defmodule TodolistWeb.WorkingtimesController do
     with {:ok, %Workingtimes{} = workingtimes} <- Directory.create_workingtimes(Map.put(workingtimes_params, "users", id)) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.workingtimes_path(conn, :show, workingtimes))
+      |> put_resp_header("location", Routes.workingtimes_path(conn, :create, workingtimes))
       |> render("show.json", workingtimes: workingtimes)
     end
   end
