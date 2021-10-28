@@ -1,10 +1,7 @@
 <template>
   <div class="">
-    <h2>Clock Vue</h2>
-    <h2>startDateTime : {{this.ClockData.time}}</h2>
-    <h2>ClockIn : {{this.ClockData.status}}</h2>
-    <button v-on:click="refresh()">refresh</button>
-    <button v-on:click="clock()">Clock {{this.ClockData.status?'OUT':'IN'}}</button>
+    <h2>{{this.time}}</h2>
+    <button v-on:click="clock()">Clock {{this.ClockData.status ? 'End Shift' : 'Start Shift'}}</button>
   </div>
 </template>
 
@@ -17,6 +14,7 @@ export default {
   name: 'ClockManager',
 
   created () {
+    this.ClockData = {status: false, time: null}
     this.refresh()
   },
 
@@ -27,24 +25,36 @@ export default {
   },
 
   methods: {
-    clock() {
-        axios.post('http://localhost:4000/api/clocks/1', {
-            clocks:
+    clock () {
+      axios.post('http://localhost:4000/api/clocks/1', {
+        clocks:
+        {
+          time: moment().format(),
+          status: !this.ClockData.status
+        }
+      }).then(resp => {
+        if (this.ClockData.status) {
+          axios.post('http://localhost:4000/api/workingtimes/' + 1, {
+            workingtimes:
             {
-                time: moment().format(),
-                status: !this.ClockData.status
+              start: this.ClockData.time,
+              end: moment().format()
             }
-        }).then(resp => {
-            this.ClockData=resp.data.data
-            console.log('Clocked ',this.ClockData.status?'IN':'OUT')
-        })
+          }).then(() => {
+            console.log('Working time created.')
+          })
+        }
+        this.ClockData = resp.data.data
+        console.log('Clocked ', this.ClockData.status ? 'IN' : 'OUT')
+      })
     },
     refresh () {
       axios.get('http://localhost:4000/api/clocks/1', {
         responseType: 'json'
       }).then(resp => {
-        this.ClockData=resp.data.data.last()
+        this.ClockData = resp.data.data.at((-1))
         console.log('Clock refreshed')
+        this.time = moment().format('YYYY/MM/D[-]hh:mm:ss')
       })
     }
   }
