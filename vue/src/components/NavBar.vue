@@ -2,7 +2,7 @@
 <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
         <b-navbar-brand href="/home" id="navBrand">Home</b-navbar-brand>
-        <b-navbar-brand href="/workingtimes" id="navBrand">Working Times</b-navbar-brand>
+        <b-navbar-brand href="/workingtimes/1" id="navBrand">Working Times</b-navbar-brand>
     </b-navbar>
 </div>
 </template>

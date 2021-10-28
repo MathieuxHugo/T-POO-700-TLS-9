@@ -2,13 +2,14 @@
   <div class="container">
     <h3 class="p-3 text-center">My Working Time Tracker</h3>
     <div>
-    <b-table
-      id="my-table"
-      :items="myProvider()"
-      :fields="['start', 'end', 'id']"
-      @row-clicked="myRowClickHandler"
-    ></b-table>
+      <b-table
+        id="my-table"
+        :items="myProvider()"
+        :fields="['start', 'end', 'id']"
+        @row-clicked="myRowClickHandler"
+      ></b-table>
   </div>
+  <p v-on:click="navigateToWorkingTime()"> Add an other Working Time here ! </p>
   </div>
 </template>
 
@@ -54,9 +55,13 @@ export default {
       return items
     },
     myRowClickHandler (record, index) {
-    // 'record' will be the row data from items
-    // `index` will be the visible row number (available in the v-model 'shownItems')
-  }
+    /// Change to real user ID
+      window.location.href = 'http://localhost:8080/workingtime/1/' + record.id
+    },
+    navigateToWorkingTime ()
+    {
+      window.location.href = 'http://localhost:8080/workingtime/1'
+    }
   }
 }
 

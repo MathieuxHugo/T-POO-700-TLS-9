@@ -23,7 +23,12 @@ const routes = [
   },
   {
     path: '/workingtime/:userid',
-    name: 'workingTime',
+    name: 'workingTime1',
+    component: () => import('../components/WorkingTime.vue')
+  },
+  {
+    path: '/workingtime/:userid/:workingtimeid',
+    name: 'workingTime2',
     component: () => import('../components/WorkingTime.vue')
   },
   {
@@ -31,7 +36,6 @@ const routes = [
     name: 'workingTimes',
     component: () => import('../components/WorkingTimes.vue')
   }
-
 ]
 
 const router = new VueRouter({
