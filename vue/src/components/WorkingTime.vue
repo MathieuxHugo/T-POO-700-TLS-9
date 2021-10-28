@@ -23,10 +23,10 @@ export default {
     createWorkingTime () {
       axios.post('http://localhost:4000/api/workingtimes/' + this.$router.currentRoute.params.userid, {
         workingtimes:
-          {
-            start: '2018-03-29T13:34:00.000',
-            end: '2018-04-29T13:34:00.000'
-          }
+        {
+          start: '2018-03-29T13:34:00.000',
+          end: '2018-04-29T13:34:00.000'
+        }
       }).then(resp => {
         console.log(resp.data.data)
         this.resp = resp.data.data

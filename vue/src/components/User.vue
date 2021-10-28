@@ -40,19 +40,19 @@ export default {
     },
 
     updateUser (userID, username, email) {
-      axios.put('http://localhost:4000/api/users/'+userID, {
+      axios.put('http://localhost:4000/api/users/' + userID, {
         users:
         {
           username: username,
           email: email
         }
-      }).then(resp => {
+      }).then(() => {
         console.log('Update Done')
       })
     },
 
     deleteUser (userID) {
-      axios.delete('http://localhost:4000/api/users/'+userID, {
+      axios.delete('http://localhost:4000/api/users/' + userID, {
         responseType: 'json'
       }).then(resp => {
         console.log('Delete Done')
@@ -62,10 +62,10 @@ export default {
     createUser (username, email) {
       axios.post('http://localhost:4000/api/users', {
         users:
-      {
-        username: username,
-        email: email
-      }
+        {
+          username: username,
+          email: email
+        }
       }).then(resp => {
         console.log('Create Done')
       })
