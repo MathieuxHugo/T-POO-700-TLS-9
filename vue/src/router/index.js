@@ -9,17 +9,12 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('../components/User.vue')
+    component: () => import('../components/Home.vue')
   },
   {
     path: '/clock/:username',
     name: 'ClockManager',
     component: () => import('../components/ClockManager.vue')
-  },
-  {
-    path: '/helloworld',
-    name: 'HelloWorld',
-    component: () => import('../components/HelloWorld.vue')
   },
   {
     path: '/workingtime/:userid',
@@ -30,6 +25,11 @@ const routes = [
     path: '/workingtimes/:userid',
     name: 'workingTimes',
     component: () => import('../components/WorkingTimes.vue')
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import('../components/User.vue')
   }
 
 ]
