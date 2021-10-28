@@ -3,10 +3,11 @@
     <h2>User Vue</h2>
     <h2>username : {{this.UserData.username}}</h2>
     <h2>email : {{this.UserData.email}}</h2>
+    <!-- Testing routes for USER entity
     <button v-on:click="getUser(1)">Getuser</button>
     <button v-on:click="deleteUser(1)">Delete user</button>
     <button v-on:click="createUser('Logan','logan@email.fr')">Create Jean paul</button>
-    <button v-on:click="updateUser(1,'Jean-Paul','jean@gmail.com')">updateUser user 1</button>
+    <button v-on:click="updateUser(1,'Jean-Paul','jean@gmail.com')">updateUser user 1</button> -->
 
   </div>
 </template>

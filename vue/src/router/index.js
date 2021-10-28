@@ -25,6 +25,11 @@ const routes = [
     path: '/workingtime/:userid',
     name: 'workingTime',
     component: () => import('../components/WorkingTime.vue')
+  },
+  {
+    path: '/workingtimes/:userid',
+    name: 'workingTimes',
+    component: () => import('../components/WorkingTimes.vue')
   }
 ]
 
