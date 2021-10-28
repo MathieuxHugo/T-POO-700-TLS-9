@@ -27,6 +27,11 @@ const routes = [
     component: () => import('../components/WorkingTime.vue')
   },
   {
+    path: '/workingtimes/:userid',
+    name: 'workingTimes',
+    component: () => import('../components/WorkingTimes.vue')
+  },
+  {
     path: '/user',
     name: 'User',
     component: () => import('../components/User.vue')
