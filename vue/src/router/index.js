@@ -9,14 +9,15 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('../components/User.vue')
+    component: () => import('../components/Home.vue')
   },
   {
-    path: '/clock/:username',
     name: 'ClockManager',
+    path: '/clock/:userid',
     component: () => import('../components/ClockManager.vue')
   },
   {
+<<<<<<< HEAD
     path: '/helloworld',
     name: 'HelloWorld',
     component: () => import('../components/HelloWorld.vue')
@@ -32,9 +33,16 @@ const routes = [
     component: () => import('../components/WorkingTime.vue')
   },
   {
+=======
+>>>>>>> 0cddfa181bc052fd245cba40416c4ba9f43026b5
     path: '/workingtimes/:userid',
     name: 'workingTimes',
     component: () => import('../components/WorkingTimes.vue')
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import('../components/User.vue')
   }
 ]
 
