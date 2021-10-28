@@ -14,11 +14,11 @@
     <div v-if="this.$router.currentRoute.params.workingtimeid == undefined" id ="inputContainer" class ="container">
       <div class= "workingContainer">
         <b-form-input id="workingStartCreate" class="inputText" placeholder="Start Date"></b-form-input>
-        <p class = "subText">Format : YYYY/MM/DD-hh:mm:ss</p>
+        <p class = "subText">Format : YYYY/MM/DDThh:mm:ss</p>
       </div>
       <div class= "workingContainer">
         <b-form-input id="workingEndCreate" class="inputText" placeholder="End Date"></b-form-input>
-        <p class = "subText">Format : YYYY/MM/DD-hh:mm:ss</p>
+        <p class = "subText">Format : YYYY-MM-DDThh:mm:ss</p>
       </div>
     </div>
     <button v-if="this.$router.currentRoute.params.workingtimeid == undefined" v-on:click="createWorkingTime()">Add</button>
@@ -75,8 +75,6 @@ export default {
       this.workingEndCreate = document.querySelector('input[id=workingEndCreate]').value
       console.log(this.workingStartCreate)
       console.log(this.workingEndCreate)
-      console.log(moment.utc(this.workingStartCreate).format())
-      console.log(moment.utc(this.workingEndCreate).format())
       axios.post('http://localhost:4000/api/workingtimes/' + this.$router.currentRoute.params.userid, {
         workingtimes:
         {
