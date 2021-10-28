@@ -75,17 +75,19 @@ export default {
       this.workingEndCreate = document.querySelector('input[id=workingEndCreate]').value
       console.log(this.workingStartCreate)
       console.log(this.workingEndCreate)
-      console.log(moment(this.workingStartCreate).format())
-      console.log(moment(this.workingEndCreate).format())
+      console.log(moment.utc(this.workingStartCreate).format())
+      console.log(moment.utc(this.workingEndCreate).format())
       axios.post('http://localhost:4000/api/workingtimes/' + this.$router.currentRoute.params.userid, {
         workingtimes:
         {
-          start: moment(this.workingStartCreate).format(),
-          end: moment(this.workingEndCreate).format()
+          start: this.workingStartCreate,
+          end: this.workingEndCreate
         }
       }).then(resp => {
         console.log(resp.data.data)
         this.resp = resp.data.data
+        window.location.href = 'http://localhost:8080/workingtimes/' + this.$router.currentRoute.params.userid
+        
       })
     },
       

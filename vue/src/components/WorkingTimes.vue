@@ -32,7 +32,7 @@ export default {
 
   methods: {
     getWorkingTimes (userID) {
-      axios.get('http://localhost:4000/api/workingtimes/' + userID + '?start=' + moment().subtract(1, 'month').format('YYYY-MM-D[T]hh:mm:ss') + '&end=' + moment().format('YYYY-MM-D[T]hh:mm:ss'), {
+      axios.get('http://localhost:4000/api/workingtimes/' + userID + '?start=2021-10-01T01:00:00&end=2021-10-31T01:00:00', {
         responseType: 'json'
       }).then(resp => {
         this.workingData = resp.data.data
