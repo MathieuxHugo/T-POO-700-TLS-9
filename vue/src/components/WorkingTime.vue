@@ -96,8 +96,8 @@ export default {
       axios.put('http://localhost:4000/api/workingtimes/' + this.$router.currentRoute.params.workingtimeid, {
         workingtimes:
           {
-              start: moment(this.workingStartInput).format(),
-              end: moment(this.workingEndInput).format()
+              start: this.workingStartInput,
+              end: this.workingEndInput
           }
       }).then(resp => {
           console.log(resp.data.data)
