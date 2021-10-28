@@ -18,7 +18,7 @@ import axios from 'axios'
 export default {
   name: 'WorkingTime',
   created () {
-    this.getWorkingTimes()
+    this.getWorkingTimes(1)
   },
 
   data () {
