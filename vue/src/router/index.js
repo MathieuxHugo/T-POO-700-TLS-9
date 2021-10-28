@@ -12,7 +12,7 @@ const routes = [
     component: () => import('../components/User.vue')
   },
   {
-    path: '/clockmanager/:userid',
+    path: '/clock/:username',
     name: 'ClockManager',
     component: () => import('../components/ClockManager.vue')
   },
