@@ -22,7 +22,7 @@ export default {
   created () {
     this.ClockData = {status: false, time: null}
     this.interval=setInterval(this.refresh,1000)
-    this.time=moment().format()
+    this.time = moment().format('HH:mm:ss[-]YYYY/MM/D')
     this.shiftTime=null
     this.workDuration=null
   },
@@ -31,12 +31,17 @@ export default {
     },
   data () {
     return {
-      ClockData: []
+      ClockData: '',
+      shiftTime:'',
+      workDuration:'',
+      time:''
+
     }
   },
 
   methods: {
     clock () {
+      console.log('coucou')
       axios.post('http://localhost:4000/api/clocks/1', {
         clocks:
         {
@@ -66,19 +71,22 @@ export default {
       return this.workDuration=hours+'h'+minutes+'m'+seconds+'s'
     },
     refresh () {
+      this.time = moment().format('HH:mm:ss[-]YYYY/MM/D')
       axios.get('http://localhost:4000/api/clocks/1', {
         responseType: 'json'
       }).then(resp => {
-        this.ClockData = resp.data.data.at((-1))
-        this.shiftTime=moment(this.ClockData.time).format('hh:mm:ss[-]YYYY/MM/D')
-        if(this.ClockData.status){ 
-          this.workDuration=this.getWorkDuration(this.ClockData.time,moment())
+        this.time = moment().format('HH:mm:ss[-]YYYY/MM/D')
+        if(resp.data.data.length>0){
+          this.ClockData = resp.data.data.at((-1))
+          this.shiftTime = moment(this.ClockData.time).format('hh:mm:ss[-]YYYY/MM/D')
+          if(this.ClockData.status){ 
+            this.workDuration = this.getWorkDuration(this.ClockData.time,moment())
+          }
+          else{
+            let lastClock = resp.data.data.at(-2)
+            this.workDuration = this.getWorkDuration(lastClock.time,this.ClockData.time)
+          }
         }
-        else{
-          let lastClock=resp.data.data.at(-2)
-          this.workDuration=this.getWorkDuration(lastClock.time,this.ClockData.time)
-        }
-        this.time = moment().format('YYYY/MM/D[-]hh:mm:ss')
       })
     }
   }
@@ -89,6 +97,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .InfoBox{
+    border-radius: 50px;
     margin-top: 5%;
     margin-left: 25%;
     margin-right: 25%;
