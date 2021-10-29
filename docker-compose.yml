@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+
+  postgres:
+    image: postgres:13-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: api_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    volumes:
+    - ./var/data/postgresql/:/var/lib/postgresql/data/
+    ports:
+    - "5433:5432"
+    networks:
+      - timemanager
+  vue:
+    build: vue/
+    container_name: vue
+    ports:
+    - "8080:8080"
+    networks:
+      - timemanager
+  phoenix:
+    build: api/
+    container_name: api
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: root
+      PGPORT: 5432
+      PGHOST: postgres
+    networks:
+      - timemanager
+    depends_on:
+    - postgres
+    ports:
+    - "4000:4000"
+
+networks:
+  timemanager:
+    driver: bridge
