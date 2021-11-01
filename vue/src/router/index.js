@@ -32,7 +32,7 @@ const routes = [
     component: () => import('../components/WorkingTimes.vue')
   },
   {
-    path: '/user',
+    path: '/user/:userid',
     name: 'User',
     component: () => import('../components/User.vue')
   },

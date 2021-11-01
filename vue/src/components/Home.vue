@@ -43,6 +43,7 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
+  margin-top: 40px;
 }
 ul {
   list-style-type: none;

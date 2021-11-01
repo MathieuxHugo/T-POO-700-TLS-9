@@ -1,0 +1,11 @@
+tbody {
+    font: normal normal 600 20px/30px "Dosis";
+}
+
+.mt-3 {
+    font-size: 25px;
+}
+
+.pagination {
+    height: 0px !important;
+}

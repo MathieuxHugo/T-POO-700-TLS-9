@@ -2,34 +2,47 @@
   <div class="container">
     <h3 class="p-3 text-center">My Working Time Tracker</h3>
     <div>
+      <p class="mt-3">Current Page: {{ currentPage }}</p>
       <b-table
-        id="my-table"
+        id="WorkingTable"
         :items="myProvider()"
+        :current-page="currentPage"
+        :per-page="perPage"
         :fields="['start', 'end', 'id']"
         @row-clicked="myRowClickHandler"
       ></b-table>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="WorkingTable"
+      ></b-pagination>
   </div>
-  <p v-on:click="navigateToWorkingTime()"> Add an other Working Time here ! </p>
+  <b-button size="lg" variant="outline-primary" id="addWorkingTime" v-on:click="navigateToWorkingTime()">Add a working Time !</b-button>
   </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-import moment from 'moment'
 
 export default {
   name: 'WorkingTime',
   created () {
     this.getWorkingTimes(1)
   },
-
   data () {
     return {
-      workingData: []
+      workingData: [],
+      perPage: 10,
+      currentPage: 1
     }
   },
-
+  computed: {
+    rows () {
+      return this.workingData.length
+    }
+  },
   methods: {
     getWorkingTimes (userID) {
       axios.get('http://localhost:4000/api/workingtimes/' + userID + '?start=2021-10-01T01:00:00&end=2021-10-31T01:00:00', {
@@ -56,11 +69,11 @@ export default {
     },
     myRowClickHandler (record, index) {
     /// Change to real user ID
-      window.location.href = 'http://localhost:8080/workingtime/1/' + record.id
+      this.$router.push('/workingtime/1/' + record.id)
     },
     navigateToWorkingTime ()
     {
-      window.location.href = 'http://localhost:8080/workingtime/1'
+      this.$router.push('/workingtime/1')
     }
   }
 }
