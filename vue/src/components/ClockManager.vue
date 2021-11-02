@@ -4,9 +4,9 @@
     <div class="TimeBox">
       <div class ="test">
         <h3>{{this.ClockData.status ? 'You started your shift at : ' : 'You finished your last shift at : '}}{{this.shiftTime}}</h3>
-        <h3>You worked {{this.workDuration}} {{this.ClockData.status ? ' since the beginning of your shift' : ' in your last shift'}}.</h3>
+        <h3>You worked {{this.workDuration}} {{this.ClockData.status ? ' since shift start' : ' in your last shift'}}.</h3>
       </div>
-      <button class="ButtonBox" v-on:click="clock()">{{this.ClockData.status ? 'END SHIFT' : 'START SHIFT'}}</button>
+      <b-button size="lg" variant="outline-primary" v-on:click="clock()">{{this.ClockData.status ? 'END SHIFT' : 'START SHIFT'}}</b-button>
     </div>
   </div>
 </template>
@@ -78,7 +78,7 @@ export default {
         this.time = moment().format('HH:mm:ss[-]YYYY/MM/D')
         if(resp.data.data.length>0){
           this.ClockData = resp.data.data.at((-1))
-          this.shiftTime = moment(this.ClockData.time).format('hh:mm:ss[-]YYYY/MM/D')
+          this.shiftTime = moment(this.ClockData.time).format('hh:mm:ss[-]YYYY/MM/DD')
           if(this.ClockData.status){ 
             this.workDuration = this.getWorkDuration(this.ClockData.time,moment())
           }
@@ -115,20 +115,11 @@ export default {
     justify-content: center;
     margin-top: 0px;
     margin-bottom: 0px;
-    background : #35aac2;
     font-weight: bold;
-  }
-  .ButtonBox{
-    width: 100%;
-    height: 150px;
-    border: solid 10px rgb(145, 28, 28);
-    background-color: #154752;
-    font-size: 50px;
   }
   .test {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #2998b1;
   }
 </style>

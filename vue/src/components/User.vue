@@ -8,12 +8,12 @@
       <div class="col-5 InputBox">
         <div>Username :</div>
         <b-input-group>
-          <b-form-input :state="usernameState" syze="lg" type="text" v-model="NewUserName" :placeholder ="this.UserData.username"></b-form-input>
+          <b-form-input :state="usernameState" type="text" v-model="NewUserName" :placeholder ="this.UserData.username"></b-form-input>
         </b-input-group>
         <br/>
         <div>Email :</div>
         <b-input-group>
-           <b-form-input :state="emailState" syze="lg" type="text" v-model="NewEmail" :placeholder ="this.UserData.email"></b-form-input>
+           <b-form-input :state="emailState" type="text" v-model="NewEmail" :placeholder ="this.UserData.email"></b-form-input>
         </b-input-group>
       </div>
       <div class="col-5 ButtonBox">
@@ -138,7 +138,7 @@ body {
   display:flex;
   align-items : center;
   justify-content: center;
-  background : #48cae4;
+  background : #0DCAF0;
   border-radius: 50px;
   margin:4%;
 }

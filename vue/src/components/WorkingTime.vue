@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h2>WorkingTime Vue</h2>
+    <h3>Working Time</h3>
     <div v-if="this.$router.currentRoute.params.workingtimeid !== undefined" id ="inputContainer" class ="container">
       <div class= "workingContainer">
         <b-form-input id="workingStart" class="inputText" :value="this.workingStart"></b-form-input>
@@ -21,9 +21,9 @@
         <p class = "subText">Format : YYYY-MM-DDThh:mm:ss</p>
       </div>
     </div>
-    <button v-if="this.$router.currentRoute.params.workingtimeid == undefined" v-on:click="createWorkingTime()">Add</button>
-    <button v-if="this.$router.currentRoute.params.workingtimeid !== undefined" v-on:click="updateWorkingTime()">Modify</button>
-    <button v-if="this.$router.currentRoute.params.workingtimeid !== undefined" v-on:click="deleteWorkingTime()">Delete</button>
+    <b-button size="lg" variant="outline-primary" v-if="this.$router.currentRoute.params.workingtimeid == undefined" v-on:click="createWorkingTime()">Add</b-button>
+    <b-button size="lg" variant="outline-primary" v-if="this.$router.currentRoute.params.workingtimeid !== undefined" v-on:click="updateWorkingTime()">Modify</b-button>
+    <b-button size="lg" variant="outline-primary" v-if="this.$router.currentRoute.params.workingtimeid !== undefined" v-on:click="deleteWorkingTime()">Delete</b-button>
     
   </div>
 </template>
@@ -32,10 +32,13 @@
 
 import axios from 'axios'
 import moment from 'moment'
+import Datepicker from 'vuejs-datepicker';
 
 export default {
   name: 'WorkingTime',
-
+  components: {
+    Datepicker
+  },
   created () {
     console.log(this.$router.currentRoute.params.workingtimeid)
     if (this.$router.currentRoute.params.workingtimeid !== undefined)
@@ -56,7 +59,8 @@ export default {
       workingStartInput: '',
       workingEndinput: '',
       workingStartCreate: '',
-      workingEndCreate: ''
+      workingEndCreate: '',
+      date: new Date(2016, 9, 16)
     }
   },
 
@@ -124,10 +128,6 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-button {
-    width: 100px;
-    height: 30px;
-}
 ul {
   list-style-type: none;
   padding: 0;
@@ -164,5 +164,17 @@ a {
   margin-top: 5px;
   font-size: 12px;
   color: gray;
+}
+
+.vdp-datepicker {
+  font-size: 20px;
+}
+
+.workingContainer {
+  margin-top: 40px;
+}
+
+h3 {
+  margin-top: 60px;
 }
 </style>
