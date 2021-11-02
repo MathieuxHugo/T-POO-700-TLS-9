@@ -5,7 +5,7 @@ config :api, Todolist.Repo,
   username: "postgres",
   password: "root",
   database: "api_dev",
-  hostname: "localhost",
+  hostname: "postgres",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
