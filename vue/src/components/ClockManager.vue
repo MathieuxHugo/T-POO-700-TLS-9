@@ -21,7 +21,8 @@ export default {
 
   created () {
     this.ClockData = {status: false, time: null}
-    this.interval=setInterval(this.refresh,1000)
+    this.refresh()
+    this.interval=setInterval(this.refreshTime,1000)
     this.time = moment().format('HH:mm:ss[-]YYYY/MM/D')
     this.shiftTime=null
     this.workDuration=null
