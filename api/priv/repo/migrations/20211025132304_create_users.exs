@@ -5,7 +5,8 @@ defmodule Todolist.Repo.Migrations.CreateUsers do
     create table(:users) do
       add :username, :string
       add :email, :string
-
+      add :role, :string
+      add :teams, {:array, :string}
       timestamps()
     end
   end

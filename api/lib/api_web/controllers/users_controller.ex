@@ -10,13 +10,24 @@ defmodule TodolistWeb.UsersController do
 
   action_fallback TodolistWeb.FallbackController
 
-  def index(conn, %{"username" => username, "email" => email}) do
-    query = from u in Users,
-        where: u.username == ^username
-        and u.email == ^email
-    users = Repo.all(query)
-    render(conn, "index.json", users: users)
+  def index(conn, params) do
+    case params do
+      %{"username" => username, "email" => email}->
+        query = from u in Users,
+            where: u.username == ^username
+            and u.email == ^email
+        users = Repo.all(query)
+        render(conn, "index.json", users: users)
+      %{"team"=>team} ->
+        query = from u in Users,
+          where: ^team in u.teams
+        users = Repo.all(query)
+        render(conn, "index.json", users: users)
+      %{} -> render(conn, "index.json", users: Directory.list_users())
+      _ -> render("show.json", [])
+    end
   end
+
 
   def create(conn, %{"users" => users_params}) do Logger.info(users_params["email"])
     if Regex.match?(~r/^[a-z0-9]+[a-z0-9'.']*[@][a-z0-9]+['.'][a-z]+$/, users_params["email"]) do
@@ -38,7 +49,6 @@ defmodule TodolistWeb.UsersController do
 
   def update(conn, %{"userid" => id, "users" => users_params}) do
     users = Directory.get_users!(id)
-
     with {:ok, %Users{} = users} <- Directory.update_users(users, users_params) do
       render(conn, "show.json", users: users)
     end

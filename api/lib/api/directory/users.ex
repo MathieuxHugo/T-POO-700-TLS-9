@@ -5,14 +5,15 @@ defmodule Todolist.Directory.Users do
   schema "users" do
     field :email, :string
     field :username, :string
-
+    field :role, :string
+    field :teams, {:array, :string}
     timestamps()
   end
 
   @doc false
   def changeset(users, attrs) do
     users
-    |> cast(attrs, [:username, :email])
-    |> validate_required([:username, :email])
+    |> cast(attrs, [:username, :email, :role, :teams])
+    |> validate_required([:username, :email, :role, :teams])
   end
 end

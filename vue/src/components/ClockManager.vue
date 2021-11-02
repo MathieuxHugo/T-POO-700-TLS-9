@@ -59,8 +59,10 @@ export default {
           }).then(() => {
             console.log('Working time created.')
           })
+          this.workDuration = this.getWorkDuration(this.ClockData.time,moment())
         }
         this.ClockData = resp.data.data
+        this.shiftTime=moment(this.ClockData.time).format('HH:mm:ss[-]YYYY/MM/DD')  
         console.log('Clocked ', this.ClockData.status ? 'IN' : 'OUT')
       })
     },
@@ -70,15 +72,20 @@ export default {
       let hours=moment(t2).diff(moment(t1),'h')
       return this.workDuration=hours+'h'+minutes+'m'+seconds+'s'
     },
-    refresh () {
+    refreshTime () {
       this.time = moment().format('HH:mm:ss[-]YYYY/MM/D')
+      if(this.ClockData.status){ 
+        this.workDuration = this.getWorkDuration(this.ClockData.time,moment())
+      }
+    },
+    refresh () {
       axios.get('http://localhost:4000/api/clocks/1', {
         responseType: 'json'
       }).then(resp => {
         this.time = moment().format('HH:mm:ss[-]YYYY/MM/D')
         if(resp.data.data.length>0){
           this.ClockData = resp.data.data.at((-1))
-          this.shiftTime = moment(this.ClockData.time).format('hh:mm:ss[-]YYYY/MM/DD')
+          this.shiftTime = moment(this.ClockData.time).format('HH:mm:ss[-]YYYY/MM/DD')
           if(this.ClockData.status){ 
             this.workDuration = this.getWorkDuration(this.ClockData.time,moment())
           }
